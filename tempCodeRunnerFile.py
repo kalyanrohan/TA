@@ -1,0 +1,1 @@
+print(f'{number_2} is an even number')
