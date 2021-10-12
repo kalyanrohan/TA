@@ -26,3 +26,7 @@ elif 3>number_2>7:
     print('GOOD')
 else:
     print('nice try')
+#list and array
+list1=[1,'string',True]
+#dictionary
+student1={'name':'Jeff','age':120,'is_vaccinated':True}
