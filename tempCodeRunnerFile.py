@@ -1,8 +1,2 @@
-rows=5
-# outer loop
-#step range(1,10)
-for i in range(1, rows + 1):
-    # inner loop
-    for j in range(1, i + 1):
-        print("*", end=" ")
-    print('')
+num_list = [1, 2, 3]
+alpha_list = ['a', 'b', 'c']
