@@ -6,24 +6,31 @@
 # #break terminates
 # #continue skips
 # #pass tells the program to do nothing
-
+# n=20
+# i=1
+# sum=0
 # while i <= n:
 #     #updating the value of sum
-#     sum = sum + i
+#     sum+=i
 #     #updating the value of i
-#     i = i+1    # update counter
-# #1st iteration i=1, sum=0
-# #2nd iteration i=2, sum=1
-# #3rd iteration i=3, sum=3
+#     i+=1 # update counter
+#     print(sum) 
 
-num_list = [1, 2, 3]
-alpha_list = ['a', 'b', 'c']
 
-for number in num_list:
-    print(number)
-    for letter in alpha_list:
-        print(letter)
-#
+
+#1st iteration i=1, sum=0
+#2nd iteration i=2, sum=1
+#3rd iteration i=3, sum=3
+
+num_list = [1,2,3,4,5,6,7,8,9]
+# alpha_list = ['a', 'b', 'c']
+
+# for number in num_list:
+#     print(number)
+#     # for letter in alpha_list:
+#     #     print(letter)
+for i in range(2,len(num_list)-1):
+    print(num_list[i])
 
 # first = [2, 3, 4]
 # second = [20, 30, 40]
