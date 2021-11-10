@@ -32,4 +32,3 @@ string1.strip()
 print(string1.replace(' ',''))
 
 
-
