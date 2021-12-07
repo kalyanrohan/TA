@@ -1,1 +1,1 @@
-f=open('sentences.txt',mode='r+',encoding = 'utf-8')
+display(shopping_list)
