@@ -17,7 +17,7 @@ def make_list():
             item=Shopping(item_name,amt)
             if item_name=="" or item.get_price()==0:
                 print("You need to enter a valid name.")
-            elif amt<1:
+            elif amt<0:
                 print("Amount has to be more than 0")
             else:
                 break
@@ -38,8 +38,8 @@ def calculate_amount(list_of_items):
         total+=list_of_items[i].total_price()
     return total
 
-shopping_list=make_list()
-display(shopping_list)
-print(f"Total amount: ${calculate_amount(shopping_list)}")
+# shopping_list=make_list()
+# display(shopping_list)
+# print(f"Total amount: ${calculate_amount(shopping_list)}")
 
-
+    
