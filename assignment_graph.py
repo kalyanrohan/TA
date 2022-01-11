@@ -29,10 +29,12 @@ def get_mean_of_steps_per_day(df):
 
 print('MEAN')
 print(get_mean_of_steps_per_day(df))
-print('MEDIAN')
 def get_median_of_total_steps_per_day(df):
     mean_per_day=df.groupby('date').median()['steps']
     return mean_per_day
+
+print('MEDIAN')
+print(get_median_of_total_steps_per_day(df))
 
 #time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 def plot_mean_of_total_steps_per_day():
