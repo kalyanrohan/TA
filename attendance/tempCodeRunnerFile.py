@@ -1,0 +1,1 @@
+data_format['occupation']=self.occupation

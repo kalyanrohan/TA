@@ -1,1 +1,1 @@
-print ("your age: ", age)
+df.dropna(subset=['steps'],inplace=True)

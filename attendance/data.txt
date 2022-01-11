@@ -1,0 +1,2 @@
+username: starlord123, password: 123, occupation: teacher, name: Tony Stark, age: 35, sex: m, class_num: 1, 
+username: ironman, password: 123, occupation: student, name: Jeff, age: 15, sex: m, class_num: 1, attendance: False, 
