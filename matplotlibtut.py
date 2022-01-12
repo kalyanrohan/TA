@@ -42,7 +42,7 @@ plt.show()
 x = np.arange(0, math.pi*2, 0.05)
 fig = plt.figure()
 ax = fig.add_axes([0.1, 0.1, 0.8, 0.8]) # main axes
-y = np.sin(x)
+y = np.cos(x)
 ax.plot(x, y)
 ax.set_xlabel('angle')
 ax.set_title('sine')

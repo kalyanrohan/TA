@@ -5,6 +5,7 @@ import random as rand
 
 df=pd.read_csv('activity.csv')
 print(df.info())
+print(df)
 
 def get_number_of_Nans(df):
     return df.isnull().sum()
@@ -80,17 +81,22 @@ weekdays=[]
 weekends=[]
 weekdays_average_steps=[]
 weekends_average_steps=[]
+print(df)
 
 for i in range(len(df)):
-    if df['WEEKDAY'][i]<5:
+    if df['WEEKDAY'][i]<=5:
         weekdays.append(df['date'][i])
         weekdays_average_steps.append(df['steps'][i])
     else:
         weekends.append(df['date'][i])
         weekends_average_steps.append(df['steps'][i])
+print(weekdays)
+print(weekends)
+print(weekdays_average_steps)
+print(weekends_average_steps)
 
 
-#plotting the average steps per day for weekdays and weekends
+# plotting the average steps per day for weekdays and weekends
 plt.figure(figsize=(20,5), dpi=100)
 plt.plot(weekdays, weekdays_average_steps, 'ro')
 plt.plot(weekends, weekends_average_steps, 'bo')

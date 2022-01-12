@@ -1,1 +1,1 @@
-df.dropna(inplace=True)
+w
