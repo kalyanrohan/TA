@@ -4,11 +4,12 @@ import matplotlib.pyplot as plt
 import random as rand
 
 df=pd.read_csv('activity.csv')
+print(df.info())
 # df.dropna(inplace=True)
 
 def get_steps_per_day(df):
-    steps_per_day = df.groupby('date').sum()['steps']
-    return steps_per_day
+    steps_per_day = df.groupby('date', dropna=True).sum()['steps']
+    return steps_per_day.to_frame()
 
 print('steps_per_day')
 print(get_steps_per_day(df))
@@ -24,21 +25,21 @@ def histogram_of_total_steps_per_day(df):
 histogram_of_total_steps_per_day(df)
 
 def get_mean_of_steps_per_day(df):
-    mean_per_day=df.groupby('date').mean()['steps']
-    return mean_per_day
+    mean_per_day=df.groupby('date', dropna=True).mean()['steps']
+    return mean_per_day.to_frame().dropna()
 
 print('MEAN')
 print(get_mean_of_steps_per_day(df))
 def get_median_of_total_steps_per_day(df):
-    mean_per_day=df.groupby('date').median()['steps']
-    return mean_per_day
+    mean_per_day=df.groupby('date', dropna=True).median()['steps']
+    return mean_per_day.to_frame().dropna()
 
 print('MEDIAN')
 print(get_median_of_total_steps_per_day(df))
 
 #time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 def plot_mean_of_total_steps_per_day():
-    plt.plot(get_mean_of_steps_per_day(df))
+    plt.plot(get_mean_of_steps_per_day(df), 'r')
     plt.xlabel('5-minute Interval')
     plt.ylabel('Mean Steps Per Day')
     plt.title('Mean of Total Steps Per Day')
@@ -76,22 +77,25 @@ print(get_median_of_total_steps_per_day(new_dataset))
 df['WEEKDAY'] = pd.to_datetime(df['date']).dt.dayofweek
 weekdays=[]
 weekends=[]
+weekdays_average_steps=[]
+weekends_average_steps=[]
 for i in range(len(df)):
-    if df['WEEKDAY'][i]<5:
+    if df['WEEKDAY'][i]<=5 and df['date'][i] not in weekdays:
         weekdays.append(df['date'][i])
-    else:
+    elif df['WEEKDAY'][i]>5 and df['date'][i] not in weekends:
         weekends.append(df['date'][i])
 
-print('WEEKDAY')
-print(weekdays)
+for i in range(len(weekdays)):
+    weekdays_average_steps.append(get_mean_of_steps_per_day(df[df['date']==weekdays[i]])['steps'])
 
-print('WEEKENDS')
-print(weekends)
+for i in range(len(weekends)):
+    weekends_average_steps.append(get_mean_of_steps_per_day(df[df['date']==weekends[i]])['steps'])
 
-# def plot_average_number_of_steps_across_all_weekdays_and_weekends(df):
-#     if df
-#     plt.xlabel('5-minute Interval')
-#     plt.ylabel('Mean Steps Per Week')
-#     plt.title('Mean of Total Steps Per Week')
-#     plt.show()
-    #plot_average_number_of_steps_across_all_weekdays_and_weekends(df)
+#plotting the average steps per day for weekdays and weekends
+plt.figure(figsize=(20,5), dpi=100)
+plt.plot(weekdays, weekdays_average_steps, 'ro')
+plt.plot(weekends, weekends_average_steps, 'bo')
+plt.xlabel('Date')
+plt.ylabel('Average Steps Per Day')
+plt.title('Average Steps Per Day for Weekdays and Weekends')
+plt.show()

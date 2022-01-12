@@ -1,1 +1,1 @@
-df.dropna(subset=['steps'],inplace=True)
+fig = plt.figure(dpi=80, figsize=(20, 6))
