@@ -1,1 +1,1 @@
-fig = plt.figure(dpi=80, figsize=(20, 6))
+df.dropna(inplace=True)

@@ -5,10 +5,24 @@ import random as rand
 
 df=pd.read_csv('activity.csv')
 print(df.info())
+
+def get_number_of_Nans(df):
+    return df.isnull().sum()
+
+print('NUMBER OF NANS:')
+print(get_number_of_Nans(df))
+
+def fill_in_Nans_with_random_values_and_create_new_dataset():
+    new_dataset =df.copy()
+    new_dataset.fillna(rand.randint(0,100), inplace=True)
+    return new_dataset
+
+print('\n new_dataset \n')
+new_dataset=fill_in_Nans_with_random_values_and_create_new_dataset()
 # df.dropna(inplace=True)
 
 def get_steps_per_day(df):
-    steps_per_day = df.groupby('date', dropna=True).sum()['steps']
+    steps_per_day = df.groupby('date').sum()['steps']
     return steps_per_day.to_frame()
 
 print('steps_per_day')
@@ -25,13 +39,13 @@ def histogram_of_total_steps_per_day(df):
 histogram_of_total_steps_per_day(df)
 
 def get_mean_of_steps_per_day(df):
-    mean_per_day=df.groupby('date', dropna=True).mean()['steps']
+    mean_per_day=df.groupby('date').mean()['steps']
     return mean_per_day.to_frame().dropna()
 
 print('MEAN')
 print(get_mean_of_steps_per_day(df))
 def get_median_of_total_steps_per_day(df):
-    mean_per_day=df.groupby('date', dropna=True).median()['steps']
+    mean_per_day=df.groupby('date').median()['steps']
     return mean_per_day.to_frame().dropna()
 
 print('MEDIAN')
@@ -54,19 +68,6 @@ def get_date_that_have_max_steps_per_5_minute_interval():
 
 print(get_date_that_have_max_steps_per_5_minute_interval())
 
-def get_number_of_Nans(df):
-    return df.isnull().sum()
-
-print('NUMBER OF NANS:')
-print(get_number_of_Nans(df))
-
-def fill_in_Nans_with_random_values_and_create_new_dataset():
-    new_dataset =df.copy()
-    new_dataset.fillna(rand.randint(0,100), inplace=True)
-    return new_dataset
-
-print('\n new_dataset \n')
-new_dataset=fill_in_Nans_with_random_values_and_create_new_dataset()
 histogram_of_total_steps_per_day(new_dataset)
 print('MEAN OF NEW DATASET')
 print(get_mean_of_steps_per_day(new_dataset))
@@ -79,17 +80,15 @@ weekdays=[]
 weekends=[]
 weekdays_average_steps=[]
 weekends_average_steps=[]
+
 for i in range(len(df)):
-    if df['WEEKDAY'][i]<=5 and df['date'][i] not in weekdays:
+    if df['WEEKDAY'][i]<5:
         weekdays.append(df['date'][i])
-    elif df['WEEKDAY'][i]>5 and df['date'][i] not in weekends:
+        weekdays_average_steps.append(df['steps'][i])
+    else:
         weekends.append(df['date'][i])
+        weekends_average_steps.append(df['steps'][i])
 
-for i in range(len(weekdays)):
-    weekdays_average_steps.append(get_mean_of_steps_per_day(df[df['date']==weekdays[i]])['steps'])
-
-for i in range(len(weekends)):
-    weekends_average_steps.append(get_mean_of_steps_per_day(df[df['date']==weekends[i]])['steps'])
 
 #plotting the average steps per day for weekdays and weekends
 plt.figure(figsize=(20,5), dpi=100)
